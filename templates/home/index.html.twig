@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper {     text-align: center; display:flex; flex-direction: column;   
+     margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Welcome to this blog </h1>
+
+   
+
+    {% for post in posts %}
+    <div class="card myCard">
+        <div class="card-header">
+
+        
+
+            
+
+            Userid :{{post.userId}}
+            
+        </div>
+        <div class="card-body">
+             <h5 class="card-title"> {{post.title }}</h5>
+           
+            <a href="posts/{{post.id}}" class="btn btn-primary">Details</a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
