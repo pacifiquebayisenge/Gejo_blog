@@ -22,7 +22,15 @@
 
             
 
-            Userid :{{post.userId}}
+
+            {% for author in authors %}
+
+                {% if (author.id) == (post.userId) %}
+
+    {{author.name}}
+                {% endif %}
+
+            {% endfor %}
             
         </div>
         <div class="card-body">

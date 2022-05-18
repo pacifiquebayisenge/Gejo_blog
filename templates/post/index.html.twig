@@ -23,7 +23,17 @@
     
   </div>
   <div class="card-footer text-muted">
-        User : {{data.userId}}
+    
+
+        
+            {% for author in authors %}
+
+                {% if (author.id) == (data.userId) %}
+
+    {{author.name}}
+                {% endif %}
+
+            {% endfor %}
   </div>
 </div>
 

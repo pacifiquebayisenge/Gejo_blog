@@ -24,10 +24,10 @@ class HomeController extends AbstractController
     {
 
         
-
-        
         return $this->render('home/index.html.twig', [
+            // all posts
             'posts' => $apiService->getAllPosts(),
+            // all authors to look for the right one
             'authors' => $apiService->getAllAuthors()
         ]);
     }
