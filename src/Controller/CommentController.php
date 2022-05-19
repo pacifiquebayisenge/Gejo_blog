@@ -40,19 +40,14 @@ class CommentController extends AbstractController
     public function index( string $id): Response
     {
         $comment = new Comment();
-        $form = $this->createForm( CommentFormType::class, $comment);
         
-        $post = $this->postRepository->getById($id);
-        $users = $this->userRepository->getAll();
-        $comments = $this->commentRepository->getAll($id);
-        
-
+        $response = $this->commentRepository->newComment($id);
        
 
 
         return $this->render('comment/index.html.twig', [
            
-            'form' => $form->createView()
+            'response' => $response
         ]);
     }
 

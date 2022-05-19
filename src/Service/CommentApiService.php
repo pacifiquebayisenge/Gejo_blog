@@ -56,11 +56,13 @@ class CommentApiService
     private function postApi(string $id) 
     {
         $body  = '{
-            "id": 101,
-    "title": "foo",
-    "body": "bar",
-    "userId": 1
+            "postId": 1,
+    "id": 1,
+    "name": "Pacifique",
+    "email": "Eliseo@gardner.biz",
+    "body": "dummy comment"
         }';
+        
         $response = $this->client->request(
             'POST',
             'https://jsonplaceholder.typicode.com/comments?' . $id ,
