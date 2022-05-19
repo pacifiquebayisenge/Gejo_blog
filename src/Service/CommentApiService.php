@@ -18,7 +18,7 @@ class CommentApiService
         $this->client = $client;
     }
 
-    // private baseURl method
+    // private baseURl GET method
     private function getApi(string $var) 
     {
         $response = $this->client->request(
@@ -53,6 +53,7 @@ class CommentApiService
 
     }
 
+    // private baseURl POST method
     private function postApi(string $id) 
     {
         $body  = '{

@@ -33,7 +33,7 @@ class HomeController extends AbstractController
 
         $posts = $this->postRepository->getAll();
         $users = $this->userRepository->getAll();
-        //$data = $this->postRepository->newPost();
+        
 
         
         

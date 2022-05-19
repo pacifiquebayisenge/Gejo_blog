@@ -18,17 +18,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
 
-    private $postRepository;
-    private $userRepository;
+   
     private $commentRepository;
 
     
     
    public function __construct(PostRepository $postRepository, UserRepository $userRepository, CommentRepository $commentRepository)
    {
-       $this->postRepository = $postRepository;
-       $this->userRepository = $userRepository;
-       $this->commentRepository = $commentRepository;
+      $this->commentRepository = $commentRepository;
    }
 
 
@@ -39,7 +36,7 @@ class CommentController extends AbstractController
      */
     public function index( string $id): Response
     {
-        $comment = new Comment();
+       
         
         $response = $this->commentRepository->newComment($id);
        
