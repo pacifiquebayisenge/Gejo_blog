@@ -18,7 +18,7 @@ class PostApiService
         $this->client = $client;
     }
 
-    // private baseURl method
+    // private baseURl  GET method
     private function getApi(string $var) 
     {
         $response = $this->client->request(
@@ -30,6 +30,47 @@ class PostApiService
         // convert response to array
         $data = $response->toArray();
 
+        return $data;
+
+    }
+
+    private function postApi() 
+    {
+        $body  = '{
+            "id": 101,
+    "title": "foo",
+    "body": "bar",
+    "userId": 1
+        }';
+        $response = $this->client->request(
+            'POST',
+            'https://jsonplaceholder.typicode.com/posts' ,
+            [
+                'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'body' =>  json_encode($body)
+             
+            ]
+        );
+
+      
+        $content = $response->getHeaders()['content-type'][0];
+
+
+        return $content;
+
+    }
+
+
+    // get all blog posts
+    public function getAllPosts() {
+
+
+        // convert response to array
+        $data = $this->getApi('posts');
+
+
         // empty array where the Post object will be pushed
         $postArr = [];
 
@@ -39,6 +80,7 @@ class PostApiService
         * get all properties
         * push it to the Post array
         */
+         
         foreach($data as $object) {
             $pos = new Post();
             $pos->setId($object["id"]);
@@ -48,21 +90,23 @@ class PostApiService
             array_push($postArr, $pos);
         }
 
-        return $postArr;
-
-    }
-
-    // get all blog posts
-    public function getAllPosts() {
-
-        return  $this->getApi('posts');
+        return  $postArr;
         
     }
     
     // get post by id 
     public function getPostById( $id):array {
+        $result =  $this->getApi('posts/' . $id);
+
         
-        return  $this->getApi('posts/' . $id);
+
+        return $result;
     }
 
+
+    // create new post
+    public function newPost() {
+        $result =  $this->postApi();
+    }
+ 
 }

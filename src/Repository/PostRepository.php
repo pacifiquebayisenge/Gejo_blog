@@ -34,6 +34,19 @@ class PostRepository extends ServiceEntityRepository
         return $this->postApiService->getAllPosts();
     }
 
+    public function getById(string $id) 
+    {
+
+        return $this->postApiService->getPostById($id);
+    }
+
+    public function newPost() 
+    {
+
+        return $this->postApiService->newPost();
+    }
+
+
     public function add(Post $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

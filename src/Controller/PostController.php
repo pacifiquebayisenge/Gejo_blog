@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
+use App\Repository\UserRepository;
 use App\Service\ApiService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,12 +17,16 @@ class PostController extends AbstractController
 {
 
     private $postRepository;
+    private $userRepository;
+    private $commentRepository;
 
     
     
-   public function __construct(PostRepository $postRepository)
+   public function __construct(PostRepository $postRepository, UserRepository $userRepository, CommentRepository $commentRepository)
    {
-       $this->postpostRepository = $postRepository;
+       $this->postRepository = $postRepository;
+       $this->userRepository = $userRepository;
+       $this->commentRepository = $commentRepository;
    }
 
 
@@ -29,24 +35,26 @@ class PostController extends AbstractController
     /**
      * @Route("/posts/{id}", name="app_post")
      */
-    public function index(  EntityManager $em, string $id): Response
+    public function index(   string $id): Response
     {
         
         
-        $repo = $em->getRepository(Post::class);
-        $posts = $repo->findAll();
+        $post = $this->postRepository->getById($id);
+        $users = $this->userRepository->getAll();
+        $comments = $this->commentRepository->getAll($id);
+        
 
-        dd($posts);
+       
 
 
-        // return $this->render('post/index.html.twig', [
-        //     // specific post
-        //     'data' => $apiService->getPostById($id),
-        //     // all comments for that specific post
-        //     'comments' => $apiService->getAllComments($id),
-        //     // all authors to look for the right one
-        //     'authors' => $apiService->getAllAuthors()
-        // ]);
+        return $this->render('post/index.html.twig', [
+            // specific post
+            'post' => $post,
+            // // all comments for that specific post
+             'comments' => $comments,
+            // // all authors to look for the right one
+             'users' => $users
+        ]);
     }
 
 

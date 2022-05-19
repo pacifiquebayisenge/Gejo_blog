@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Service\CommentApiService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,9 +17,19 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CommentRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+
+    private $commentApiService;
+
+    public function __construct(ManagerRegistry $registry, CommentApiService $commentApiService)
     {
+        $this->commentApiService = $commentApiService;
         parent::__construct($registry, Comment::class);
+    }
+
+    public function getAll(string $id) 
+    {
+
+        return $this->commentApiService->getAllComments($id);
     }
 
     public function add(Comment $entity, bool $flush = false): void
