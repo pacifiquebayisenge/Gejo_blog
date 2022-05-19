@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\PostRepository;
+use App\Repository\UserRepository;
 use App\Service\ApiService;
 use Doctrine\ORM\Mapping\PostRemove;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,28 +15,31 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class HomeController extends AbstractController
 {
 
+    private $postRepository;
+    private $userRepository;
     
     
-    
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostRepository $postRepository, UserRepository $userRepository)
     {
-        $this->postpostRepository = $postRepository;
+        $this->postRepository = $postRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
      * @Route("/home", name="app_home")
      */
-    public function index( PostRepository $postRepository): Response
+    public function index( ): Response
     {
 
-        $posts = $postRepository->getAll();
+        $posts = $this->postRepository->getAll();
+        $users = $this->userRepository->getAll();
         
-        dd($posts);
-        // return $this->render('home/index.html.twig', [
-        //     // all posts
-        //     'posts' => $apiService->getAllPosts(),
-        //     // all authors to look for the right one
-        //     'authors' => $apiService->getAllAuthors()
-        // ]);
+        
+        return $this->render('home/index.html.twig', [
+            // all posts
+            'posts' => $posts,
+            // all authors to look for the right one
+            'authors' => $users
+        ]);
     }
 }

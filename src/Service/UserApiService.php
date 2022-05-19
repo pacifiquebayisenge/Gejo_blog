@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Comment;
+use App\Entity\User;
 use Laminas\Code\Reflection\FunctionReflection;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -23,40 +23,39 @@ class UserApiService
     {
         $response = $this->client->request(
             'GET',
-            'https://jsonplaceholder.typicode.com/comments?' . $var
+            'https://jsonplaceholder.typicode.com/' . $var
         );
 
       
         // convert response to array
         $data = $response->toArray();
 
-        // empty array where the Comment object will be pushed
-        $commentArr = [];
+        // empty array where the User object will be pushed
+        $userArr = [];
 
         /*
         * for each array element 
-        * create a new Comment instance
+        * create a new User instance
         * get all properties
-        * push it to the Comment array
+        * push it to the User array
         */
         foreach($data as $object) {
-            $com = new Comment();
-            $com->setPostId($object["postId"]);
+            $com = new User();
             $com->setId($object["id"]);
             $com->setName($object["name"]);
             $com->setEmail($object["email"]);
-            $com->setBody($object["body"]);
-            array_push($commentArr, $com);
+            array_push($userArr, $com);
         }
 
-        return $commentArr;
+        return $userArr;
 
     }
 
+    
 
-    // get all comments
-    public function getAllComments($id):array {
-        return  $this->getApi('comments?postId=' . $id);
+    // get all users
+    public function getAllUsers():array {
+        return  $this->getApi('users');
     }
 
  

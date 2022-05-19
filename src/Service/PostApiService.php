@@ -50,10 +50,7 @@ class PostApiService
 
         return $postArr;
 
-       
-        
     }
-
 
     // get all blog posts
     public function getAllPosts() {
@@ -68,23 +65,4 @@ class PostApiService
         return  $this->getApi('posts/' . $id);
     }
 
-
-    // get all comments
-    public function getAllComments($id):array {
-        return  $this->getApi('comments?postId=' . $id);
-    }
-
-
-    // get all authors
-    public function getAllAuthors():array {
-        return  $this->getApi('users');
-    }
-
-    
-
-
-
-    
-   
- 
 }
