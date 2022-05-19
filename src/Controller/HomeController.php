@@ -33,9 +33,9 @@ class HomeController extends AbstractController
 
         $posts = $this->postRepository->getAll();
         $users = $this->userRepository->getAll();
-        $data = $this->postRepository->newPost();
+        //$data = $this->postRepository->newPost();
 
-        dd($data);
+        
         
         return $this->render('home/index.html.twig', [
             // all posts

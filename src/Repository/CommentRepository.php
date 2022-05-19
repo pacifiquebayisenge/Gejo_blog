@@ -26,10 +26,20 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    // get all comments form specific post
+    // id is the post id 
     public function getAll(string $id) 
     {
 
         return $this->commentApiService->getAllComments($id);
+    }
+
+    // create new comment for specific post
+    // id is the post id 
+    public function newComment(string $id) 
+    {
+
+        return $this->commentApiService->newComment($id);
     }
 
     public function add(Comment $entity, bool $flush = false): void

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Form\CommentFormType;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
@@ -13,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PostController extends AbstractController
+class CommentController extends AbstractController
 {
 
     private $postRepository;
@@ -33,31 +35,24 @@ class PostController extends AbstractController
    
 
     /**
-     * @Route("/posts/{id}", name="app_post")
+     * @Route("/comment/create/postId/{id}", name="app_post_create")
      */
     public function index( string $id): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm( CommentFormType::class, $comment);
         
-        // get specific post
         $post = $this->postRepository->getById($id);
-
-        // get all users to find the right one
         $users = $this->userRepository->getAll();
-
-        // get all commments for the specific post 
         $comments = $this->commentRepository->getAll($id);
         
 
        
 
 
-        return $this->render('post/index.html.twig', [
-            // specific post
-            'post' => $post,
-             // all comments for that specific post
-             'comments' => $comments,
-            // // all authors to look for the right one
-             'users' => $users
+        return $this->render('comment/index.html.twig', [
+           
+            'form' => $form->createView()
         ]);
     }
 

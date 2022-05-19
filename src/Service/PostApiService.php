@@ -34,35 +34,7 @@ class PostApiService
 
     }
 
-    private function postApi() 
-    {
-        $body  = '{
-            "id": 101,
-    "title": "foo",
-    "body": "bar",
-    "userId": 1
-        }';
-        $response = $this->client->request(
-            'POST',
-            'https://jsonplaceholder.typicode.com/posts' ,
-            [
-                'headers' => [
-                'Content-Type' => 'application/json',
-            ],
-            'body' =>  json_encode($body)
-             
-            ]
-        );
-
-      
-        $content = $response->getHeaders()['content-type'][0];
-
-
-        return $content;
-
-    }
-
-
+   
     // get all blog posts
     public function getAllPosts() {
 
@@ -104,9 +76,6 @@ class PostApiService
     }
 
 
-    // create new post
-    public function newPost() {
-        $result =  $this->postApi();
-    }
+    
  
 }

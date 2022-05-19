@@ -53,10 +53,44 @@ class CommentApiService
 
     }
 
+    private function postApi(string $id) 
+    {
+        $body  = '{
+            "id": 101,
+    "title": "foo",
+    "body": "bar",
+    "userId": 1
+        }';
+        $response = $this->client->request(
+            'POST',
+            'https://jsonplaceholder.typicode.com/comments?' . $id ,
+            [
+                'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'body' =>  json_encode($body)
+             
+            ]
+        );
+
+      
+        $content = $response->getStatusCode();
+
+
+        return $content;
+
+    }
+
+
 
     // get all comments
     public function getAllComments($id):array {
         return  $this->getApi('comments?postId=' . $id);
+    }
+
+    // create new comment
+    public function newComment($id) {
+        return  $this->postApi('comments?postId=' . $id);
     }
 
  
