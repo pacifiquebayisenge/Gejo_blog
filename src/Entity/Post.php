@@ -104,7 +104,6 @@ class Post
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setPost($this);
         }
 
         return $this;

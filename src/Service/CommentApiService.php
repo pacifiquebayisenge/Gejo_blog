@@ -54,16 +54,19 @@ class CommentApiService
     }
 
     // private baseURl POST method
-    private function postApi(string $id) 
+    private function postApi(string $id, Comment $com) 
     {
-        $body  = '{
-            "postId": 1,
-    "id": 1,
-    "name": "Pacifique",
-    "email": "Eliseo@gardner.biz",
-    "body": "dummy comment"
-        }';
+
+        // get body
+        $body  =   array( 
+            "postId" => $id,
+            "id"=> 1,
+            "name"=> $com->getName(),
+            "email"=> $com->getEmail(),
+            "body"=> $com->getBody()
+        );
         
+        // post method with the body encoded in json format
         $response = $this->client->request(
             'POST',
             'https://jsonplaceholder.typicode.com/comments?' . $id ,
@@ -71,16 +74,17 @@ class CommentApiService
                 'headers' => [
                 'Content-Type' => 'application/json',
             ],
+            // the body request
             'body' =>  json_encode($body)
              
             ]
         );
 
-      
-        $content = $response->getStatusCode();
+      // get the network staus code
+        $statusCode = $response->getStatusCode();
 
 
-        return $content;
+        return $statusCode;
 
     }
 
@@ -92,8 +96,8 @@ class CommentApiService
     }
 
     // create new comment
-    public function newComment($id) {
-        return  $this->postApi('comments?postId=' . $id);
+    public function newComment($id, Comment $com) {
+        return  $this->postApi('comments?postId=' . $id , $com);
     }
 
  

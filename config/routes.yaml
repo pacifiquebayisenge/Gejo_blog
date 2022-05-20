@@ -1,3 +1,7 @@
 index:
   path: /
   controller: App\Controller\HomeController::index
+
+result:
+  path: /comment/create/result/postId={id}&status={status}
+  controller: App\Controller\CommentController::result

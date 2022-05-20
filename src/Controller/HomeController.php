@@ -30,8 +30,9 @@ class HomeController extends AbstractController
      */
     public function index( ): Response
     {
-
+        // get all posts
         $posts = $this->postRepository->getAll();
+        // get all users to find the right one
         $users = $this->userRepository->getAll();
         
 

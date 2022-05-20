@@ -37,10 +37,7 @@ class Comment
      */
     private $body;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
-     */
-    private $post;
+   
 
    
 

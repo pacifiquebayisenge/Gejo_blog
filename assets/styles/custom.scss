@@ -13,6 +13,21 @@ body {
     list-style-type: none; /* Remove bullets */
   }
 
+  .mb-3 {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    input,
+    textarea {
+      width: 50%;
+    }
+
+    textarea {
+      height: 8rem;
+    }
+  }
+
   .list-group {
     align-items: center;
   }
