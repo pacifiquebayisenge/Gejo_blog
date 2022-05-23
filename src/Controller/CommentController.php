@@ -69,7 +69,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/comment/create/result/postId={id}%26status={status}", name="app_post_create_result")
+     * @Route("/comment/create/result/postId={postId}%26status={status}", name="app_post_create_result")
      */
 
      // result  of the reqeust with the netzork status code

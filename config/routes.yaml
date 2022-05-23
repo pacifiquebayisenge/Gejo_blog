@@ -3,5 +3,5 @@ index:
   controller: App\Controller\HomeController::index
 
 result:
-  path: /comment/create/result/postId={id}&status={status}
+  path: /comment/create/result/postId={postId}&status={status}
   controller: App\Controller\CommentController::result
