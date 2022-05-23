@@ -69,10 +69,10 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/comment/create/result/postId={2}%26status={201}", name="app_post_create_result")
+     * @Route("/comment/create/result/postId={id}%26status={status}", name="app_post_create_result")
      */
 
-     // result apga of the reqeust with the netzork status code
+     // result  of the reqeust with the netzork status code
     public function result($postId, $status) : Response 
     {
        

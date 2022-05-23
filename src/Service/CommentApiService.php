@@ -74,6 +74,7 @@ class CommentApiService
                 'headers' => [
                 'Content-Type' => 'application/json',
             ],
+            
             // the body request
             'body' =>  json_encode($body)
              
